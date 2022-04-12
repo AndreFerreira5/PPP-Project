@@ -1,0 +1,3 @@
+C:/Users/G512L/CLionProjects/ProjetoPPP/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/G512L/CLionProjects/ProjetoPPP/cmake-build-debug/CMakeFiles/ProjetoPPP.dir
+C:/Users/G512L/CLionProjects/ProjetoPPP/cmake-build-debug/CMakeFiles/rebuild_cache.dir
