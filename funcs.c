@@ -41,12 +41,20 @@ void eliminar(){
     FILE *fp;
     char str[MAXCHAR];
 
-    fp = fopen("active_students.csv","r");
+    fp = fopen("C://Users//G512L//CLionProjects//ProjetoPPP//active_students.csv","r");
+
+printf("%s", fp);
+
+    char *token;
 
     if(fp == NULL) {error_op_fl();}
     else{
         while( fgets(str, MAXCHAR, fp) != NULL){
-            printf("%s", str);
+            token = strtok(str, ",");
+            while(token != NULL){
+                printf("%s ",  token);
+                token = strtok(NULL, ",");
+            }
         }
     }
 
@@ -68,7 +76,11 @@ void listar_saldo(){
 
 void aluno_info(){
 
-    printf("eheheh");
+    char name[100];
+
+    printf("Introduza o nome do aluno sem espacos(ex: AntonioMoreira): ");
+    scanf("%s", name);
+
 
 }
 
