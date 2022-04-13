@@ -45,19 +45,11 @@ void introduzir(){
 
 void eliminar(){
     FILE *fp, *fp_temp;
-    char str[MAXCHAR], line_str[MAXCHAR];
-    char name[100], turma[2], info[10][100], file_name[] = {"C://Users//G512L//CLionProjects//ProjetoPPP//active_students.csv"}, temp_file_name[] = {"C://Users//G512L//CLionProjects//ProjetoPPP//temp.csv"};
-    //NAO ESQUECER DE USAR O MALLOC
+    char *token, name[100], turma[2], info[10][100], file_name[] = {"C://Users//G512L//CLionProjects//ProjetoPPP//active_students.csv"}, temp_file_name[] = {"C://Users//G512L//CLionProjects//ProjetoPPP//temp.csv"}, str[MAXCHAR], line_str[MAXCHAR];
     int ano, num, ctrl;
-
-
 
     fp = fopen(file_name,"r");
     fp_temp = fopen(temp_file_name, "w");
-
-    printf("%s", fp);
-
-    char *token;
 
     if(fp == NULL) {error_op_fl();} //throw error if file is null
     else{
@@ -114,13 +106,50 @@ void listar_saldo(){
 
 }
 
-void aluno_info(){
+void aluno_info(){ //FALTA APRESENTAR AS TRANSAÇÕES
 
-    char name[100];
+    FILE *fp;
+    char *token, name[100], turma[2], info[10][100], file_name[] ="C://Users//G512L//CLionProjects//ProjetoPPP//active_students.csv", str[MAXCHAR], line_str[MAXCHAR];
+    int ano, num, ctrl;
 
-    printf("Introduza o nome do aluno sem espacos(ex: AntonioMoreira): ");
-    scanf("%s", name);
+    fp = fopen(file_name,"r");
 
+    if(fp == NULL) {error_op_fl();} //throw error if file is null
+    else{
+
+        printf("Introduza o nome do aluno: ");
+        scanf("%s", &name);
+        printf("\n\n");
+        system("cls||clear");
+        printf("Alunos encontrados no sistema: \n");
+
+
+        while( fgets(str, MAXCHAR, fp) != NULL){ //do until it reaches the end of the file
+            strcpy(line_str, str); //copy current line to line_str
+            token = strtok(str, ","); //assign to token the words until the first ","
+
+            ctrl = 0;
+
+            while(token != NULL){//do until it reaches the end of the line
+                strcpy(info[ctrl], token);//copy the student's info to the info array
+                token = strtok(NULL, ","); //get the following words delimited by ","
+                ctrl++;
+
+            }
+            if(strcmp(info[0], name) == 0){ //If the student's name matches then print all of thats student's info
+                printf("\n%s\n", info[0]);
+                printf("     |----- Data de Nascimento: %c%c/%c%c/%c%c%c%c\n", info[1][0], info[1][1], info[1][2], info[1][3], info[1][4], info[1][5], info[1][6], info[1][7]);
+                printf("     |----- Ano: %s\n", info[2]);
+                printf("     |----- Turma: %s\n", info[3]);
+                printf("     |----- Numero: %s\n", info[4]);
+                printf("     L----- Saldo: %s", info[5]);
+
+            }
+        }
+    }
+
+    fclose(fp);
+    back_main_menu(); //go back to main menu
 
 }
 
